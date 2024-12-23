@@ -1,0 +1,179 @@
+/* Updated CSS */
+:root {
+    --gradient-primary: linear-gradient(135deg, #FFA6B0, #FFFFFF);
+    --gradient-secondary: linear-gradient(135deg, #FFA6B0, #C8A2C8);
+    --gradient-hover: linear-gradient(135deg, #C8A2C8, #FFA6B0);
+    --footer-blue: #7692FF;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 100vh;
+    background: var(--gradient-primary);
+    color: black; /* Ensure text remains black */
+    text-align: center;
+}
+
+body.dark-mode {
+    background: #2c3e50;
+    color: black; /* Override dark mode text color */
+}
+
+body.dark-mode header {
+    background: #7692FF;
+}
+
+header {
+    width: 100%;
+    padding: 15px 30px;
+    background: #FFA6B0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #FFFFFF;
+    margin: 0;
+    margin-left: 20px;
+}
+
+button {
+    background: var(--gradient-secondary);
+    border: none;
+    border-radius: 20px;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode button {
+    background: var(--footer-blue);
+}
+
+button:hover {
+    background: var(--gradient-hover);
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+main {
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 8px 10px rgba(118, 146, 255, 0.3);
+    max-width: 800px;
+    width: 90%;
+    text-align: center;
+    margin: 20px auto;
+}
+
+main:hover {
+    box-shadow: 0 6px 15px rgba(118, 146, 255, 0.3);
+    transform: scale(1.02);
+    transition: all 0.3s ease;
+}
+
+main ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+main ul li {
+    padding: 15px 20px;
+    background: var(--gradient-secondary);
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: black; /* Override text color for consistency */
+    font-size: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+main ul li span.date {
+    font-size: 0.85em;
+    color: black; /* Ensure date text is black */
+    margin-left: 10px;
+}
+
+#quote {
+    font-size: 2em;
+    font-weight: bold;
+    color: #FFA6B0;
+    margin: 0;
+    animation: fadeIn 1.5s ease-in-out;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for emphasis */
+}
+
+#date {
+    color: black; /* Ensure date remains black */
+}
+
+.archive-quote {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: black; /* Ensure archive quotes are black */
+    background: var(--gradient-secondary);
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+footer {
+    width: 100%;
+    padding: 10px 30px;
+    background: var(--footer-blue);
+    color: #FFFFFF;
+    text-align: center;
+    border-top: 2px solid #f5c6cb;
+    font-size: 0.9em;
+}
+
+footer p {
+    margin: 0;
+    color: #FFFFFF;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    main ul li {
+        font-size: 0.9em;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    button {
+        font-size: 0.9em;
+        padding: 8px 15px;
+    }
+
+    footer {
+        font-size: 0.7em;
+    }
+}

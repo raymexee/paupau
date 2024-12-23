@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pour paupau l'asticot</title>
+    <link rel="stylesheet" href="style_girly.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="citepauline.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Pour Pauline
+        </h1>
+    </header>
+
+    <main id="app">
+        <h1 id="quote">Bienvenue !</h1>
+        <p id="date"></p>
+        <div id="waiting-message">
+            <p>Les messages commenceront le <strong>1er janvier 2025</strong>. Ça arrive vite !</p>
+            <p class="subtext">En attendant, tu peux toujours m'écrire 🫶🏻</p>
+        </div>
+
+        <!-- Button to save favorite quote -->
+        <button id="save-quote-button">Ajouter aux favoris</button>
+
+        <!-- Button to view favorites -->
+        <button id="view-favorites-button" onclick="location.href='favorites.html'">Voir les favoris</button>
+
+        <!-- Button to view archive -->
+        <button id="archive-button" onclick="location.href='archive.html'">Voir l'archive</button>
+    </main>
+
+    <footer>
+        <p>Cadeau de Noël 2024</p>
+        <!-- Dark mode toggle button -->
+        <button id="dark-mode-toggle">Activer le mode sombre</button>
+    </footer>
+
+    <script>
+        const quotes = [
+            "quote 0",
+            "Aujourd'hui c'est le premier jour, j'espère que cette année sera joyeuse pour toi ! T'inquiète pas, je ne te lâcherais pas pendant 2025 !",
+            "Complimente toi aujourd'hui, t'en vaux la peine ma biche",
+            "Qui dit 3 janvier dit ski, j'espère que t'es sur les pistes ma bichette",
+            "Oublie pas de me demander des recommendations musicales aujourd'hui, j'ai des goûts de roi ",
+            "Aujourd'hui, ça fait 3 mois qu'on est amis, et j'ai jamais regretté ni une seule seconde ",
+            "C'est le retour de l'école mais aussi de voir tes amis ! Ne stresse pas trop pendant les examens, ça en vaut pas la peine. Oublie pas et garde la tête haute, t'es une personne géniale !",
+            "Pas de message spécial aujourd'hui, juste s'il te plait ne stressse pas trop, et si c'est le cas parle en moi ",
+            "T'es une amie incroyable, j'aime tellement ta présence ! J'espère que tu passes une tellement bonne journée ^^",
+            "Tout le monde t'ADORE ma biche, moi le premier",
+            "Oublie pas de méditer un petit moment aujourd'hui ",
+            "Hehehe, rappelle toi du moment où je te disais que j'étais en train de faire ce cadeau, tu partais en cable.",
+            "N'oublie jamais que comme l'homme a besoin d'oxygène pour vivre, il a besoin d'art et de poésie. Ouvre toi à l'art aujourdhui, pense à autre chose que les cours 🫶🏻",
+            "Au moins une personne aujourdhui a souri grâce à toi, et si y'a personne d'autre, cette personne ça sera moi",
+            "Hmm, je me demande quelle surprise je vais préparer pour décembre...",
+            "Oublie pas aujourd'hui de dire à quelqu'un que tu les aime, c'est important",
+            "T'inquiète pas de ne pas réussir, les seuls qui n'échouent pas c'est ceux qui font rien",
+            "Je suis toujours fier de toi, surtout quand t'as survécu une semaine de plus dans ce Collège de mort.",
+            "Vous jouez contre Lille aujourd'hui, attention à pas perdre contre LES BETES ;)",
+            "Je t'invite à regarder good will hunting aujourdhui, c'est important ;)",
+            "Oublie pas de résoudre une équation en plus aujourdhui ;)",
+            "Oublie pas que les gens apprécient ta présence, J'ESPERE QUE T'AS FAIT LEQUATION DE HIER",
+            "J'ai hâte qu'on se revoie, même si j'écris ce message dans le passé hehehhehhe",
+            "Carpe Diem, profite de ta journée et tes amis/ies",
+            "Je pense fort à toi en fin de semaine, c'est la dernière ligne droite, courage mv !",
+            "Si tu te sens nulle, oublie pas que t'as une photo avec MALDINI",
+            "Petit rappel de reregarder OU LIRE dead poets society ;)",
+            "Je suis très heureux de t'avoir rencontré, et d'avoir l'occasion de te parler chaque jour",
+            "Faites de chaque instant un souvenir précieux.",
+            "Faisons un petit rappel, Vétroz c'est pas le Valais, c'est les frouzes",
+            "Le savais-tu, les kiwis (oiseaux) sont tellement mal faits par la nature que leurs oeuf fais la taille de leur corps, conclusion ils se détruisent le fiac",
+            "Fin du mois !!!! Plus que 5 mois de cours ma biche j'espère que t'as hâte"
+        ];
+
+        function getQuoteOfTheDay(date) {
+            const startOfYear = new Date(Date.UTC(date.getFullYear(), 0, 1));
+            const currentUTCDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+            const dayOfYear = Math.floor((currentUTCDate - startOfYear) / (1000 * 60 * 60 * 24));
+            return quotes[dayOfYear % quotes.length];
+        }
+
+        function getQuoteState(fixedDate = null) {
+            const now = fixedDate || new Date();
+            const startDate = new Date('2025-01-01T00:00:00');
+            if (now >= startDate) {
+                return {
+                    showQuote: true,
+                    dailyQuote: getQuoteOfTheDay(now),
+                    displayDate: `Citation pour le ${now.toLocaleDateString()}`
+                };
+            } else {
+                return { showQuote: false };
+            }
+        }
+
+        function renderQuote({ showQuote, dailyQuote, displayDate }) {
+            const quoteElement = document.getElementById("quote");
+            const dateElement = document.getElementById("date");
+            const waitingMessage = document.getElementById("waiting-message");
+
+            if (showQuote) {
+                quoteElement.style.display = "block";
+                waitingMessage.style.display = "none";
+                quoteElement.textContent = dailyQuote;
+                dateElement.textContent = displayDate;
+                dateElement.style.display = "block";
+            } else {
+                quoteElement.style.display = "none";
+                waitingMessage.style.display = "block";
+            }
+        }
+
+        function updateQuote(fixedDate = null) {
+    const quoteState = getQuoteState(fixedDate);
+    renderQuote(quoteState);
+
+    // Fill archive with missing quotes
+    const quotesArchive = JSON.parse(localStorage.getItem('quotesArchive')) || [];
+    const archiveDates = quotesArchive.map(entry => entry.date);
+    const today = new Date();
+    const startDate = new Date('2025-01-01');
+
+    for (let d = startDate; d <= today; d.setDate(d.getDate() + 1)) {
+        const dateString = d.toLocaleDateString();
+        if (!archiveDates.includes(dateString)) {
+            const dailyQuote = getQuoteOfTheDay(new Date(d));
+            quotesArchive.push({ date: dateString, message: dailyQuote });
+        }
+    }
+
+    localStorage.setItem('quotesArchive', JSON.stringify(quotesArchive));
+
+    // Save today's quote to the archive
+    if (quoteState.showQuote) {
+        const todayDate = today.toLocaleDateString();
+        const janFirst2025 = new Date('2025-01-01');
+        if (!archiveDates.includes(todayDate) && today >= janFirst2025) {
+            quotesArchive.push({ date: todayDate, message: quoteState.dailyQuote });
+            localStorage.setItem('quotesArchive', JSON.stringify(quotesArchive));
+        }
+    }
+}
+
+        function setMidnightTimer() {
+            const now = new Date();
+            const msUntilMidnight =
+                new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0) - now;
+
+            setTimeout(() => {
+                updateQuote();
+                setInterval(updateQuote, 24 * 60 * 60 * 1000);
+            }, msUntilMidnight);
+        }
+
+        updateQuote();
+        setMidnightTimer();
+    </script>
+</body>
+</html>
